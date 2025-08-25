@@ -24,3 +24,9 @@ Retard_moy_total_arrivee=abs(Retard_moy_total_arrivee);
 run;
 
 /* Initialement, notre base de données contenait des valeurs négatives en raison d'erreurs de saisie */
+
+/*Data Exploration*/
+proc means data=sncf.clean_sncf_data;
+output out =sncf.Stat_descriptives;run;
+
+
