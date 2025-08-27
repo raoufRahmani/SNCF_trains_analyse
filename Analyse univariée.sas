@@ -9,7 +9,15 @@ de la ville et du nombre de gares qu’elle dessert.
  */
 
 /*Durée moyenne du trajet*/
+data sncf.clean_sncf_data;set sncf.clean_sncf_data;
+duree_heure='Durée moyenne du trajet'n/60;
+run;
 
+
+proc sgplot data=sncf.clean_sncf_data;
+histogram duree_heure;
+xaxis label="Durée moyenne du trajet (heures)";
+run;
 
 
 
