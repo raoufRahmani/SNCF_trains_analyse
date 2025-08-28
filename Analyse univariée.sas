@@ -22,17 +22,23 @@ run;
 /*Analyser les retards des trains*/
 /*Pour chaque trajet, le nombre de retards est classé par catégories en fonction de leur
  cause. Nous allons observer comment ces retards se répartissent.*/
-proc means data=sncf.clean_sncf_data mean;
-var 
-Pct_retard_gare
-Pct_retard_voyageurs	
-"Prct retard pour cause gestion t"n
-"Prct retard pour cause infrastru"n
-"Prct retard pour cause matériel"n
-"Prct retard pour causes externes"n;
-    output out=sncf.retards mean= Moyenne;
-    run;
+proc means data=sncf.clean_sncf_data mean noprint;
+    var 
+        Pct_retard_gare
+        Pct_retard_voyageurs
+        "Prct retard pour cause gestion t"n
+        "Prct retard pour cause infrastru"n
+        "Prct retard pour cause matériel"n
+        "Prct retard pour causes externes"n;
+    output out=sncf.retards 
+        mean=Pct_retard_gare_mean Pct_retard_voyageurs_mean
+             Prct_gestion_mean Prct_infra_mean Prct_materiel_mean Prct_externes_mean;
+run;
 
+data sncf.retards_clean;
+    set sncf.retards;
+    drop _TYPE_ _FREQ_;
+run;
 
 
 
