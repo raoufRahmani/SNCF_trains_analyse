@@ -8,8 +8,8 @@ puis la gare de Marseille Saint-Charles avec 479 départs, en raison de l’impo
 de la ville et du nombre de gares qu’elle dessert.
  */
 
-/*Durée moyenne du trajet*/
-data sncf.clean_sncf_data;set sncf.clean_sncf_data;
+/*Durée moyenne du trajet*/   
+data sncf.clean_sncf_data;set sncf.clean_sncf_data; 
 duree_heure='Durée moyenne du trajet'n/60;
 run;
 
@@ -19,6 +19,19 @@ histogram duree_heure;
 xaxis label="Durée moyenne du trajet (heures)";
 run;
 
+/*Analyser les retards des trains*/
+/*Pour chaque trajet, le nombre de retards est classé par catégories en fonction de leur
+ cause. Nous allons observer comment ces retards se répartissent.*/
+proc means data=sncf.clean_sncf_data mean;
+var 
+Pct_retard_gare
+Pct_retard_voyageurs	
+"Prct retard pour cause gestion t"n
+"Prct retard pour cause infrastru"n
+"Prct retard pour cause matériel"n
+"Prct retard pour causes externes"n;
+    output out=sncf.retards mean= Moyenne;
+    run;
 
 
 
